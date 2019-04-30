@@ -81,8 +81,8 @@ class App extends Component {
                 <tr
                   key={i}
                 >
-                  <td> 1</td>
-                  <td>Serving</td>
+                  <td>{item.serving.amount}</td>
+                  <td>{item.serving.units}</td>
                   <td style={{textAlign: 'left'}}>{item.name}</td>
                   <td>{item.protein && `${item.protein.amount} g`}</td>
                   <td>{item.sugar && `${item.sugar.amount} g`}</td>
