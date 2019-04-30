@@ -12,6 +12,7 @@ class App extends Component {
       recipeIngredients: []
     }
     this.addToRecipe = this.addToRecipe.bind(this);
+    this.handleAmountChange = this.handleAmountChange.bind(this);
   }
   
   addToRecipe(event) {
@@ -20,10 +21,30 @@ class App extends Component {
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
     const item = foodItems.find(f => f._id === id);
     console.log('adding', item);
+    item.recipeAmount = item.serving.amount;    // set default amount to whatever is 1 serving
     this.setState({
       selectedItem: item,
-      recipeIngredients: [...this.state.recipeIngredients].concat(item)
+      recipeIngredients: this.state.recipeIngredients.concat(item)
     })
+  }
+  
+  handleAmountChange(event) {
+    const id = event.target.name;
+    console.log(`looking for ${id}`);
+    const index = this.state.recipeIngredients.findIndex(r => r._id === id);
+    console.log(`setting ${index} element to ${event.target.value}`);
+    // set the right element of recipeIngredients
+    this.setState({
+      recipeIngredients: [
+      ...this.state.recipeIngredients.slice(0,index),
+      {
+        ...this.state.recipeIngredients[index],
+        recipeAmount: event.target.value,
+      },
+      ...this.state.recipeIngredients.slice(index+1)
+    ]
+    })
+    
   }
   
   getTotal(field) {
@@ -81,12 +102,16 @@ class App extends Component {
                 <tr
                   key={i}
                 >
-                  <td>{item.serving.amount}</td>
+                  <td><input
+                    name={item._id}
+                    value={this.state.recipeIngredients[i].recipeAmount}
+                    onChange={this.handleAmountChange} />
+                  </td>
                   <td>{item.serving.units}</td>
                   <td style={{textAlign: 'left'}}>{item.name}</td>
-                  <td>{item.protein && `${item.protein.amount} g`}</td>
-                  <td>{item.sugar && `${item.sugar.amount} g`}</td>
-                  <td>{item.sodium && `${item.sodium.amount} mg`}</td>
+                  <td>{item.protein && `${item.protein.amount * (item.recipeAmount / item.serving.amount)} g`}</td>
+                  <td>{item.sugar && `${item.sugar.amount * (item.recipeAmount / item.serving.amount)} g`}</td>
+                  <td>{item.sodium && `${item.sodium.amount * (item.recipeAmount / item.serving.amount)} mg`}</td>
                 </tr>
               )
             })}
