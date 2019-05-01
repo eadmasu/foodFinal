@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PropTypes from 'PropTypes';
+import PropTypes from 'prop-types';
 
 // import './App.css';
 // import _ from 'lodash';
@@ -13,6 +13,7 @@ class ComponentTemplate extends Component {
       // key1: starting value,
       // key2: starting value, etc
     }
+    // example of binding a method so "this" will be recognized within it
     // this.addToRecipe = this.addToRecipe.bind(this);
   }
   
@@ -38,5 +39,10 @@ class ComponentTemplate extends Component {
   }
   
 }
+
+ComponentTemplate.propTypes = {
+  someRequiredString: PropTypes.string.isRequired,
+  someRequiredFunction: PropTypes.func.isRequired
+};
 
 export default ComponentTemplate;

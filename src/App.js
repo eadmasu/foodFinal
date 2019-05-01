@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import _ from 'lodash';
 import foodItems from './data/fooditems.js';
+import RecipeIngredientsTable from './components/RecipeIngredientsTable'
 
 class App extends Component {
   
@@ -47,14 +48,6 @@ class App extends Component {
     
   }
   
-  getTotal(field) {
-    return this.state.recipeIngredients.reduce((acc, curr, idx, src) => {
-                return (
-                  acc + (curr[field] && !isNaN(curr[field].amount) ? curr[field].amount : 0)
-                )
-              }, 0);
-  }
-  
   render() {
     
     console.log('fooditems', foodItems);
@@ -85,58 +78,9 @@ class App extends Component {
           })}
           </div>
         
-          <table className="table table-bordered" style={{marginTop: '30px'}}>
-            <thead>
-            <tr>
-              <td>Quantity</td>
-              <td>Units</td>
-              <td>Item</td>
-              <td>Protein</td>
-              <td>Sugar</td>
-              <td>Sodium</td>
-            </tr>
-            </thead>
-            <tbody>
-            {this.state.recipeIngredients.map((item, i) => {
-              return (
-                <tr
-                  key={i}
-                >
-                  <td><input
-                    name={item._id}
-                    value={this.state.recipeIngredients[i].recipeAmount}
-                    onChange={this.handleAmountChange} />
-                  </td>
-                  <td>{item.serving.units}</td>
-                  <td style={{textAlign: 'left'}}>{item.name}</td>
-                  <td>{item.protein && `${item.protein.amount * (item.recipeAmount / item.serving.amount)} g`}</td>
-                  <td>{item.sugar && `${item.sugar.amount * (item.recipeAmount / item.serving.amount)} g`}</td>
-                  <td>{item.sodium && `${item.sodium.amount * (item.recipeAmount / item.serving.amount)} mg`}</td>
-                </tr>
-              )
-            })}
-            <tr style={{background: '#e1e1e1'}}>
-              <td colSpan={2}></td>
-              <td>Total</td>
-              {/* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce */}
-              <td>{this.state.recipeIngredients.reduce((acc, curr, idx, src) => {
-                return (
-                  acc + (curr.protein && !isNaN(curr.protein.amount) ? curr.protein.amount : 0)
-                )
-              }, 0)}
-              </td>
-              <td>
-                {`${this.state.recipeIngredients.reduce((acc, curr, idx, src) => {
-                  return (
-                    acc + (curr.sugar && !isNaN(curr.sugar.amount) ? curr.sugar.amount : 0)
-                  )
-                }, 0)} g`}
-              </td>
-              <td>{`${this.getTotal('sodium')} mg`}
-              </td>
-            </tr>
-            </tbody>
-          </table>
+          <RecipeIngredientsTable
+            recipeIngredients={this.state.recipeIngredients}
+            />
         </div>
       </div>
     );
