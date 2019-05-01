@@ -48,9 +48,17 @@ class App extends Component {
     
   }
   
+  sortByField(arr, field) {
+    return arr.sort((a, b) => {
+      return (
+        (b[field] ? b[field].amount : 0) - (a[field] ? a[field].amount : 0)
+      );
+    })
+  }
+  
   render() {
     
-    console.log('fooditems', foodItems);
+    const sortedFoodItems = this.sortByField(foodItems, 'protein')
     
     return (
       <div className="App">
@@ -58,12 +66,7 @@ class App extends Component {
         <p>Create a recipe by adding ingredients. See how much sugar, protein and salt are in your recipe.</p>
         <div className="container">
           <div className="row">
-          {foodItems
-            .sort((a, b) => {
-              return (
-                (b.protein ? b.protein.amount : 0) - (a.protein ? a.protein.amount : 0)
-              );
-            })
+          {sortedFoodItems
             .map((f, i) => {
             return (
               <div
