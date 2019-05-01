@@ -10,10 +10,14 @@ class App extends Component {
     super(props);
     this.state = {
       selectedItem: {},
-      recipeIngredients: []
+      recipeIngredients: [],
+      loggedIn: false,
+      username: ''
     }
     this.addToRecipe = this.addToRecipe.bind(this);
     this.handleAmountChange = this.handleAmountChange.bind(this);
+    this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    this.login = this.login.bind(this);
   }
   
   addToRecipe(event) {
@@ -48,6 +52,20 @@ class App extends Component {
     
   }
   
+  handleUsernameChange(event) {
+    this.setState({
+      username: event.target.value
+    })
+  }
+  
+  login(event) {
+    if (this.state.username.length > 4) {
+      this.setState({
+        loggedIn: true
+      })
+    }
+  }
+  
   sortByField(arr, field) {
     return arr.sort((a, b) => {
       return (
@@ -62,34 +80,42 @@ class App extends Component {
     
     return (
       <div className="App">
-        <h1>What's in that?</h1>
-        <p>Create a recipe by adding ingredients. See how much sugar, protein and salt are in your recipe.</p>
         <div className="container">
-          <div className="row">
-          {sortedFoodItems
-            .map((f, i) => {
-            return (
-              <div
-                className="col-sm-2 food-card"
-                key={i}
-              >
-                <div className="name">
-                  {f.name}
+        {!this.state.loggedIn &&
+          <h1>Hi! Who are you? <input name="username" value={this.state.username} onChange={this.handleUsernameChange} /> <button className="btn btn-primary" onClick={this.login}>Log in</button></h1>
+        }
+        {this.state.loggedIn &&
+          <div>
+            <h1>What's in that?</h1>
+            <p>Create a recipe by adding ingredients. See how much sugar, protein and salt are in your recipe.</p>
+          
+            <div className="row">
+            {sortedFoodItems
+              .map((f, i) => {
+              return (
+                <div
+                  className="col-sm-2 food-card"
+                  key={i}
+                >
+                  <div className="name">
+                    {f.name}
+                  </div>
+                  <button
+                    className="btn btn-primary"
+                    onClick={this.addToRecipe}
+                    name={f._id}
+                  >Add to recipe
+                  </button>
                 </div>
-                <button
-                  className="btn btn-primary"
-                  onClick={this.addToRecipe}
-                  name={f._id}
-                >Add to recipe
-                </button>
-              </div>
-            )
-          })}
+              )
+            })}
+            </div>
+          
+            <RecipeIngredientsTable
+              recipeIngredients={this.state.recipeIngredients}
+              />
           </div>
-        
-          <RecipeIngredientsTable
-            recipeIngredients={this.state.recipeIngredients}
-            />
+        }
         </div>
       </div>
     );
