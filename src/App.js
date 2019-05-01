@@ -12,12 +12,14 @@ class App extends Component {
       selectedItem: {},
       recipeIngredients: [],
       loggedIn: false,
-      username: ''
+      username: '',
+      sortedBy: ''
     }
     this.addToRecipe = this.addToRecipe.bind(this);
     this.handleAmountChange = this.handleAmountChange.bind(this);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.login = this.login.bind(this);
+    this.handleSortChange = this.handleSortChange.bind(this);
   }
   
   addToRecipe(event) {
@@ -66,6 +68,12 @@ class App extends Component {
     }
   }
   
+  handleSortChange(event) {
+    this.setState({
+      sortedBy: event.target.value
+    })
+  }
+  
   sortByField(arr, field) {
     return arr.sort((a, b) => {
       return (
@@ -76,7 +84,7 @@ class App extends Component {
   
   render() {
     
-    const sortedFoodItems = this.sortByField(foodItems, 'protein')
+    const sortedFoodItems = this.sortByField(foodItems, this.state.sortedBy);
     
     return (
       <div className="App">
@@ -88,7 +96,17 @@ class App extends Component {
           <div>
             <h1>What's in that?</h1>
             <p>Create a recipe by adding ingredients. See how much sugar, protein and salt are in your recipe.</p>
-          
+            <div className="form-inline">
+              <div className="form-group">
+                <label htmlFor="sel1" style={{marginRight: 10}}>Sort items by most to least </label>
+                <select className="form-control" onChange={this.handleSortChange}>
+                  <option>Choose one</option>
+                  <option value="protein">Protein</option>
+                  <option value="sugar">Sugar</option>
+                  <option value="sodium">Sodium</option>
+                </select>
+              </div>
+            </div>
             <div className="row">
             {sortedFoodItems
               .map((f, i) => {
