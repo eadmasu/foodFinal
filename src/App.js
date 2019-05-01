@@ -58,10 +58,16 @@ class App extends Component {
         <p>Create a recipe by adding ingredients. See how much sugar, protein and salt are in your recipe.</p>
         <div className="container">
           <div className="row">
-          {foodItems.map((f, i) => {
+          {foodItems
+            .sort((a, b) => {
+              return (
+                (b.protein ? b.protein.amount : 0) - (a.protein ? a.protein.amount : 0)
+              );
+            })
+            .map((f, i) => {
             return (
               <div
-                className="col-sm-4 col-xs-6 food-card"
+                className="col-sm-2 food-card"
                 key={i}
               >
                 <div className="name">
