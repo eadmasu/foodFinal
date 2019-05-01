@@ -112,7 +112,7 @@ class App extends Component {
               .map((f, i) => {
               return (
                 <div
-                  className="col-sm-2 food-card"
+                  className="col-lg-2 col-sm-4 col-xs-6 food-card"
                   key={i}
                 >
                   <div className="name">

@@ -17,6 +17,10 @@
     margin: 10px auto;
 }
 
+.name {
+    flex-grow: 1;
+}
+
 .row {
     display: -webkit-box;
     display: -webkit-flex;
@@ -24,7 +28,10 @@
     display: flex;
     flex-wrap: wrap;
 }
+
 .row > [class*='col-'] {
     display: flex;
     flex-direction: column;
+    align-content: space-between;
+    height: 160px;
 }
