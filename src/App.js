@@ -1,7 +1,16 @@
 import React, {Component} from 'react';
+import request from 'axios';
+
 import './App.css';
 import foodItems from './data/fooditems.js';
 import RecipeIngredientsTable from './components/RecipeIngredientsTable'
+
+// API reference: https://ndb.nal.usda.gov/ndb/doc/apilist/API-FOOD-REPORTV2.md
+// Food search: https://ndb.nal.usda.gov/ndb/search/list
+// Get a key here: https://ndb.nal.usda.gov/ndb/doc/index# (page search for "key")
+
+const APIKEY = 'DEMO_KEY'
+const APIURL = 'https://api.nal.usda.gov/ndb/V2/reports?ndbno=09038&ndbno=45086173&ndbno=45009100&type=b&format=json';
 
 class App extends Component {
   
@@ -19,6 +28,22 @@ class App extends Component {
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.login = this.login.bind(this);
     this.handleSortChange = this.handleSortChange.bind(this);
+  }
+  
+  // get data from API
+  
+  componentWillMount() {
+    request.get(`${APIURL}&api_key=${APIKEY}`)
+      .then((content) => {
+        console.log('returned from api', content.data);
+  
+        const str1 = JSON.stringify(content.data);
+        const str2 = JSON.stringify(content.data, null, 4); // (Optional) beautiful indented output.
+        console.log(str2);
+      })
+      .catch((error) => {
+        console.error('Error reading data:', error);
+      });
   }
   
   // for the selected ingredient, add it to the recipe
