@@ -1,0 +1,32 @@
+Assignment:
+
+Clone the existing food repo at bitbucket.org/htriolo/food into a new folder
+
+Below the table of ingredients, add a dividing line and then 2 fields: an input field and a textfield
+
+Recipe name: (input)
+
+Recipe directions: (textfield)
+
+A Show Recipe button that displays
+
+	1. The name of the recipe
+
+	2. A list of the ingredients
+
+	3. Directions for making the recipe
+
+
+
+Challenges:
+
+
+Add a column to the recipe ingredients table with a button or x that deletes the item when clicked
+
+Change the color of a cell in the sugar column if it contains more than 4g of sugar
+
+Set the table column headers so that when you click on one, it sorts the ingredients by the amount of that nutrient
+
+Include pictures with food items
+
+Only allow login if the user enters a username in a pre-defined array of users
