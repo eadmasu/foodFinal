@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './App.css';
-import _ from 'lodash';
 import foodItems from './data/fooditems.js';
 import RecipeIngredientsTable from './components/RecipeIngredientsTable'
 
@@ -9,11 +8,11 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedItem: {},
-      recipeIngredients: [],
-      loggedIn: false,
-      username: '',
-      sortedBy: ''
+      selectedItem: {},             // shows which item was most recently selected
+      recipeIngredients: [],        // array of user's selected ingredients
+      loggedIn: false,              // true once user enters a name > 4 characters
+      username: '',                 // username entered by user
+      sortedBy: ''                  // field the items are being sorted on ('protein', 'sugar', etc)
     }
     this.addToRecipe = this.addToRecipe.bind(this);
     this.handleAmountChange = this.handleAmountChange.bind(this);
@@ -21,6 +20,8 @@ class App extends Component {
     this.login = this.login.bind(this);
     this.handleSortChange = this.handleSortChange.bind(this);
   }
+  
+  // for the selected ingredient, add it to the recipe
   
   addToRecipe(event) {
     const id = event.target.name;
@@ -35,12 +36,18 @@ class App extends Component {
     })
   }
   
+  //  take whatever quantity the user specified, and change the nutrient amounts displayed accordingly
+  
   handleAmountChange(event) {
+    // what is the id of this ingredient?
     const id = event.target.name;
     console.log(`looking for ${id}`);
+    
+    // what is its index in the recipeIngredients array?
     const index = this.state.recipeIngredients.findIndex(r => r._id === id);
     console.log(`setting ${index} element to ${event.target.value}`);
-    // set the right element of recipeIngredients
+    
+    // update the right element of recipeIngredients
     this.setState({
       recipeIngredients: [
       ...this.state.recipeIngredients.slice(0,index),
@@ -51,14 +58,17 @@ class App extends Component {
       ...this.state.recipeIngredients.slice(index+1)
     ]
     })
-    
   }
   
+  // when the user enters a username in the login screen, set it in the state
+
   handleUsernameChange(event) {
     this.setState({
       username: event.target.value
     })
   }
+  
+  // change the state to indicate user is logged in
   
   login(event) {
     if (this.state.username.length > 4) {
@@ -68,11 +78,15 @@ class App extends Component {
     }
   }
   
+  // handle user selecting a different sort variable
+  
   handleSortChange(event) {
     this.setState({
       sortedBy: event.target.value
     })
   }
+  
+  // utility sort function to sort arr by descending value of field (a string)
   
   sortByField(arr, field) {
     return arr.sort((a, b) => {
@@ -82,6 +96,8 @@ class App extends Component {
     })
   }
   
+  // this is where put the JSX (html + javascript) to display:
+  
   render() {
     
     const sortedFoodItems = this.sortByField(foodItems, this.state.sortedBy);
@@ -89,9 +105,15 @@ class App extends Component {
     return (
       <div className="App">
         <div className="container">
+          
+          {/* Show this if not logged in */}
+          
         {!this.state.loggedIn &&
           <h1>Hi! Who are you? <input name="username" value={this.state.username} onChange={this.handleUsernameChange} /> <button className="btn btn-primary" onClick={this.login}>Log in</button></h1>
         }
+        
+          {/* Show this once logged in */}
+          
         {this.state.loggedIn &&
           <div>
             <h1>What's in that?</h1>
@@ -108,8 +130,7 @@ class App extends Component {
               </div>
             </div>
             <div className="row">
-            {sortedFoodItems
-              .map((f, i) => {
+            {sortedFoodItems.map((f, i) => {
               return (
                 <div
                   className="col-lg-2 col-sm-4 col-xs-6 food-card"

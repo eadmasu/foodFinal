@@ -2,10 +2,22 @@ export default [
   {
     "_id": '1',
     "name": "Giant Seedless Red Raspberry Jam",
-    "sodium": {"amount": 5, "units": "mg"},
-    "sugar": {"amount": 10, "units": "g"},
-    "total carbohydrates": {"amount": 13, "units": "g"},
-    "serving": {"amount": 1, "units": "T"}
+    "sodium": {
+      "amount": 5,
+      "units": "mg"
+    },
+    "sugar": {
+      "amount": 10,
+      "units": "g"
+    },
+    "total carbohydrates": {
+      "amount": 13,
+      "units": "g"
+    },
+    "serving": {
+      "amount": 1,
+      "units": "T"
+    }
   },
   {
     "_id": '2',

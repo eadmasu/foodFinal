@@ -1,18 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-// import './App.css';
-// import _ from 'lodash';
-// import foodItems from './data/fooditems.js';
-
 class RecipeIngredientsTable extends Component {
   
   constructor(props) {
     super(props);
-    this.state = {
-      // key1: starting value,
-      // key2: starting value, etc
-    }
     this.getTotal = this.getTotal.bind(this);
   }
   
@@ -23,8 +15,6 @@ class RecipeIngredientsTable extends Component {
       )
     }, 0);
   }
-  
-  // any other class methods go here
   
   render() {
     
