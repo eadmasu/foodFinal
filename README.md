@@ -9,11 +9,11 @@ The repo for this project is at https://bitbucket.org/htriolo/food
 
 To install it in a folder on the desktop called final, open the terminal window (using Git Bash, or WebStorm) and cd to the Desktop.  Then do:
 
-<pre>
+```
 git clone git@bitbucket.org:htriolo/food.git final
 cd final
 npm install
-</pre> 
+```
 
 (if you have trouble installing, try deleting package-lock.json and yarn.lock first)
 
@@ -22,20 +22,21 @@ In Desktop/final, run <code>npm start</code>
 
 ### Save your work
 After you make some changes and want to save them, do:
-<pre>
+```
 git add .
 git commit -m "Add input field for recipe name and state property recipeName to keep it"
-</pre>
+```
 
 When you want to push to your bitbucket or github account, commit your changes and do:
-<pre>
+```
 git push origin master
-</pre>
+```
 
 When you want to push to Heroku, commit your changes and do:
-<pre>
+```
 git push heroku master
-</pre>
+```
+
 
 ## Final Project
 
