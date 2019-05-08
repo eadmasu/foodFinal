@@ -10,7 +10,7 @@ The repo for this project is at https://bitbucket.org/htriolo/food
 To install it in a folder on the desktop called final, open the terminal window (using Git Bash, or WebStorm) and cd to the Desktop.  Then do:
 
 ```
-git clone git@bitbucket.org:htriolo/food.git final
+git clone https://bitbucket.org/htriolo/food.git final
 cd final
 npm install
 ```
@@ -18,7 +18,10 @@ npm install
 (if you have trouble installing, try deleting package-lock.json and yarn.lock first)
 
 ### Run the app
-In Desktop/final, run <code>npm start</code>
+In Desktop/final, run 
+```
+npm start
+```
 
 ### Save your work
 After you make some changes and want to save them, do:
