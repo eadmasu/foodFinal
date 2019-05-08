@@ -37,7 +37,12 @@ class RecipeIngredientsTable extends Component {
               <tr
                 key={i}
               >
-                <td>{item.serving.amount}</td>
+                <td>
+                  <input
+                    name={item._id}
+                    value={this.props.recipeIngredients[i] ? this.props.recipeIngredients[i].recipeAmount : 1}
+                    onChange={this.props.handleAmountChange} />
+                </td>
                 <td>{item.serving.units}</td>
                 <td style={{textAlign: 'left'}}>{item.name}</td>
                 <td>{item.protein && `${item.protein.amount * (item.recipeAmount / item.serving.amount)} g`}</td>
@@ -68,7 +73,8 @@ class RecipeIngredientsTable extends Component {
 }
 
 RecipeIngredientsTable.propTypes = {
-  recipeIngredients: PropTypes.array.isRequired
+  recipeIngredients: PropTypes.array.isRequired,
+  handleAmountChange: PropTypes.func.isRequired
 };
 
 export default RecipeIngredientsTable;

@@ -177,6 +177,7 @@ class App extends Component {
           
             <RecipeIngredientsTable
               recipeIngredients={this.state.recipeIngredients}
+              handleAmountChange={this.handleAmountChange}
               />
           </div>
         }
