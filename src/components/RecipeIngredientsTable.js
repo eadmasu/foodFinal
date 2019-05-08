@@ -8,12 +8,18 @@ class RecipeIngredientsTable extends Component {
     this.getTotal = this.getTotal.bind(this);
   }
   
+  // get the new total for each nutrient based on the standard serving amount and the user-entered recipe amount
+  // acc = sum
+  // curr = current element of this.props.recipeIngredients
+  // idx and src are not used
+  
   getTotal(field) {
     return this.props.recipeIngredients.reduce((acc, curr, idx, src) => {
+      const recipeAmount = curr[field] && !isNaN(curr[field].amount) ? curr[field].amount * (curr.recipeAmount / curr.serving.amount) : 0
       return (
-        acc + (curr[field] && !isNaN(curr[field].amount) ? curr[field].amount : 0)
+        acc + recipeAmount
       )
-    }, 0);
+    }, 0);  // 0 = initial value for sum
   }
   
   render() {
