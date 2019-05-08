@@ -1,68 +1,58 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+Its purpose is to read and display a list of food items, allowing the user to choose some to add to a recipe. The recipe is displayed in a table that shows the totals for selected nutrients, and also (in the final project part, which you'll create) as a traditional recipe, with a list of ingredients and directions for making it.
 
-In the project directory, you can run:
+## Notes about setup
 
-### `npm start`
+### Repository
+The repo for this project is at https://bitbucket.org/htriolo/food
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To install it in a folder on the desktop called final, open the terminal window (using Git Bash, or WebStorm) and cd to the Desktop.  Then do:
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+<pre>
+git clone git@bitbucket.org:htriolo/food.git final
+cd final
+npm install
+</pre> 
 
-### `npm test`
+(if you have trouble installing, try deleting package-lock.json and yarn.lock first)
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Run the app
+In Desktop/final, run <code>npm start</code>
 
-### `npm run build`
+### Save your work
+After you make some changes and want to save them, do:
+<pre>
+git add .
+git commit -m "Add input field for recipe name and state property recipeName to keep it"
+</pre>
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+When you want to push to your bitbucket or github account, commit your changes and do:
+<pre>
+git push origin master
+</pre>
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+When you want to push to Heroku, commit your changes and do:
+<pre>
+git push heroku master
+</pre>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Final Project
 
-### `npm run eject`
+Below the existing app, add an area that looks like this at first:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![Start setup](https://s3-us-west-1.amazonaws.com/lfm-general/mc2019/screen1.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Then when the user starts entering ingredients, looks like this:
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![Intermediate view](https://s3-us-west-1.amazonaws.com/lfm-general/mc2019/screen2.png)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+And finally looks like this:
 
-## Learn More
+![Final view](https://s3-us-west-1.amazonaws.com/lfm-general/mc2019/screen3.png)
+
+## Learn more
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
