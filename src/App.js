@@ -21,6 +21,7 @@ class App extends Component {
       recipeIngredients: [],        // array of user's selected ingredients
       loggedIn: false,              // true once user enters a name > 4 characters
       username: '',                 // username entered by user
+      loginError: false,            // will be set true if username is entered incorrectly
       sortedBy: ''                  // field the items are being sorted on ('protein', 'sugar', etc)
     }
     this.addToRecipe = this.addToRecipe.bind(this);
@@ -96,9 +97,13 @@ class App extends Component {
   // change the state to indicate user is logged in
   
   login(event) {
-    if (this.state.username.length > 4) {
+    if (this.state.username.length > 4 && isNaN(this.state.username)) {
       this.setState({
         loggedIn: true
+      })
+    } else {
+      this.setState({
+        loginError: true
       })
     }
   }
@@ -134,7 +139,10 @@ class App extends Component {
           {/* Show this if not logged in */}
           
         {!this.state.loggedIn &&
+          <div>
           <h1>Hi! Who are you? <input name="username" value={this.state.username} onChange={this.handleUsernameChange} /> <button className="btn btn-primary" onClick={this.login}>Log in</button></h1>
+            <p style={{color: this.state.loginError ? 'red' : 'black'}}>Enter a username that is more than 4 letters</p>
+          </div>
         }
         
           {/* Show this once logged in */}
